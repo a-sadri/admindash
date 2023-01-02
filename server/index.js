@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
+import connectDB from './config/db.js';
 import clientRoutes from './routes/client.js';
 import generalRoutes from './routes/general.js';
 import managementRoutes from './routes/management.js';
@@ -12,6 +13,7 @@ import salesRoutes from './routes/sales.js';
 
 // Configuration
 dotenv.config();
+connectDB();
 
 const app = express();
 
@@ -29,8 +31,8 @@ app.use('/general', generalRoutes);
 app.use('/management', managementRoutes);
 app.use('/sales', salesRoutes);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 6000;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port: ${PORT}`);
 });
